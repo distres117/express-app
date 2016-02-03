@@ -1,0 +1,11 @@
+extends layout
+
+block body
+    .container
+        h1.page-header To do List
+        .list-group 
+            each todo, index in todos
+                .row
+                    a.list-group-item(href="/#{todo.id}") #{index + 1}. #{todo.content}
+                        a.pull-right(href="/#{todo.id}?method=delete") Remove
+        button(class="btn btn-primary pull-right") +Add
