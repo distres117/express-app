@@ -8,4 +8,8 @@ block body
                 .row
                     a.list-group-item(href="/#{todo.id}") #{index + 1}. #{todo.content}
                         a.pull-right(href="/#{todo.id}?method=delete") Remove
-        button(class="btn btn-primary pull-right") +Add
+        form.well(action="/", method="POST") 
+            .form-group
+                label(for='content') New item
+                input.form-control(name="content",type="text", placeholder="Text goes here")
+                button(type="submit", class="btn btn-primary pull-right") +Add

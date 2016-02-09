@@ -21,7 +21,7 @@ function remove(id){
         todos.splice(todos.indexOf(todo), 1);
 }
 
-function Todo(content){
+function Todo(content, isNew){
     this.content = content;
     this.id = String(id++);
     this.date = new Date();

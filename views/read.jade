@@ -2,10 +2,16 @@ extends layout
 
 block body
     .container
+        
         h1.page-header Todo # #{id}
         ul.list-group
             li.list-group-item 
                 = content
             li.list-group-item Created: #{date}
-        
+        form.well(action="/#{id}?method=put", method="POST") 
+            .form-group
+                label(for='content') Update item
+                input.form-control(name="content",type="text", placeholder="Text goes here")
+                button(type="submit", class="btn btn-primary pull-right") Update
+        a.pull-left(class="btn btn-primary", href='/') Back
     
