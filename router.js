@@ -18,7 +18,9 @@ router.route('/')
 
 router.route('/:id')
     .get(function(req,res){
-        res.render('read', req.todo)
+        res.render('read', req.todo, function(err,data){
+           res.render('index', {todos: fakeModel.all(),  template: data, id: req.todo.id}); 
+        })
     })
     .delete(function(req,res){
         fakeModel.remove(req.todo.id);
@@ -26,7 +28,7 @@ router.route('/:id')
     })
     .put(function(req,res){
        req.todo.update(req.body.content);
-       res.render('read', req.todo);
+       res.redirect('/');
     });
 
 

@@ -6,6 +6,7 @@ var app = express();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
+app.use(require('express-partial')());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(function(req,res,next){
     if (req.query.method){

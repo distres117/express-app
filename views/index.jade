@@ -6,10 +6,11 @@ block body
         .list-group 
             each todo, index in todos
                 .row
-                    a.list-group-item(href="/#{todo.id}") #{index + 1}. #{todo.content}
+                    a(href="/#{todo.id}", class=( 'list-group-item ' + (todo.id === id ? 'active' : ''))) #{index + 1}. #{todo.content}
                         a.pull-right(href="/#{todo.id}?method=delete") Remove
         form.well(action="/", method="POST") 
             .form-group
                 label(for='content') New item
                 input.form-control(name="content",type="text", placeholder="Text goes here")
                 button(type="submit", class="btn btn-primary pull-right") +Add
+        != template
