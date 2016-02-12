@@ -20,8 +20,4 @@ app.use(express.static('node_modules'));
 app.use(require('./logger'));
 app.use(require("./router"));
 
-
-
-app.listen(8080, function(){
-    console.log("Server is running...");
-});
+module.exports = app;

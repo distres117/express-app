@@ -33,3 +33,4 @@ router.route('/:id')
 
 
 module.exports = router;
+module.exports.db = fakeModel;
