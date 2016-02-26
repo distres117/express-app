@@ -22,13 +22,10 @@ xdescribe('Basic db ops', function(){
 });
 
 describe('Model ops', function(){
-   beforeEach(function(done){
-        Promise.all([Todo.insertMany(seed.todos), User.insertMany(seed.users) ])
-        .then(function(){
-            done();
-        });
+   before(function(){
+        return Promise.all([Todo.insertMany(seed.todos), User.insertMany(seed.users) ]);
    });
-  afterEach(function(done){
+  after(function(done){
         connect.db.dropDatabase(function(err){
             if (err)
                 console.error(err);
