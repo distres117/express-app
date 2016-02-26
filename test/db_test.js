@@ -23,14 +23,10 @@ xdescribe('Basic db ops', function(){
 
 describe('Model ops', function(){
    beforeEach(function(done){
-     Todo.insertMany(seed.todos)
-    .then(function(){
-        return User.insertMany(seed.users)
-     })
-     .then(function(){
-         done();
-     })
-     .catch(done)
+        Promise.all([Todo.insertMany(seed.todos), User.insertMany(seed.users) ])
+        .then(function(){
+            done();
+        });
    });
   afterEach(function(done){
         connect.db.dropDatabase(function(err){
@@ -52,13 +48,11 @@ describe('Model ops', function(){
         done(err);  
       })
    });
-   it('gets users associated todos', function(done){
-      User.findOne({name: 'Oliver'})
-      .then(function(user){
-        return user.populateTodos();
-      })
+   it('gets users associated todos using populate', function(done){
+      User.findOne({name: 'Oliver'}).populate('todos')
       .then(function(user){
           expect(user).to.have.property('todos');
+          expect(user.todos.length).to.equal(2);
           done();
       })
       .catch(done);

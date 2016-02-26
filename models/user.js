@@ -14,22 +14,9 @@ var userSchema = new Schema({
         type: String,
         required: true
     },
-    email: String
+    email: String,
+    todos: [{type: Schema.Types.ObjectId, ref: 'Todo'}]
 });
-
-userSchema.methods.populateTodos = function(){
-    var inst = this;
-    return new Promise(function(res,rej){
-       Todo.find({user: this._id})
-        .then(function(todos){
-        inst['todos'] = todos;
-           res(inst); 
-        });
-    });
-    
-    
-}
-
 
 
 var user = mongoose.model('User', userSchema);
