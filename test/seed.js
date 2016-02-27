@@ -11,6 +11,6 @@ var _users = new RefArray('User',[
     ]);
 
 module.exports = {
-    todos: _todos.build(['_id', 'user']),
-    users: _users.build(['_id', 'todos']) 
+    todos: _todos.build('user'),
+    users: _users.build('todos') 
 };

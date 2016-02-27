@@ -2,10 +2,6 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var todoSchema = new Schema({
-    _id:{
-        type: Schema.Types.ObjectId,
-        default: mongoose.Types.ObjectId
-    },
    content: {
        type:String,
        required: true

@@ -6,10 +6,6 @@ var mongoose = require('mongoose'),
 
     
 var userSchema = new Schema({
-    _id: {
-      type: Schema.Types.ObjectId,
-      default: mongoose.Types.ObjectId
-    },
     name: {
         type: String,
         required: true
