@@ -1,7 +1,7 @@
 var expect = require('chai').expect,
     app = require('../app'),
     request = require("supertest")(app),
-    connect = require('../models')(),
+    connect = require('../models'),
     Todo = require('../models/todo'),
     User = require('../models/user'),
     seed = require('./seed'),
@@ -23,14 +23,13 @@ xdescribe('Basic db ops', function(){
 
 describe('Model ops', function(){
    before(function(){
-        return Promise.all([Todo.insertMany(seed.todos), User.insertMany(seed.users) ]);
+      return connect()
+        .then(function(){
+            Promise.all([Todo.insertMany(seed.todos), User.insertMany(seed.users) ]);
+        });
    });
-  after(function(done){
-        connect.db.dropDatabase(function(err){
-            if (err)
-                console.error(err);
-            done();
-      });
+  after(function(){
+        return Promise.all([Todo.remove(), User.remove() ]);
   });
    it('adds id when not supplied', function(done){
       User.create({

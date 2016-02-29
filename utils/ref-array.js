@@ -1,17 +1,18 @@
 var mongoose = require('mongoose');
     
 
-function RefArray(model,arr,fn){
+function RefArray(model, fields, arr,fn){
     for (var i in arr)
         this.objectIds.push(fn ? fn() : mongoose.Types.ObjectId());
     this.arr = arr;
-    this.model = model
+    this.model = model;
+    this.fields = fields;
 }
 
 RefArray.prototype.objectIds = [];
 
 RefArray.prototype.build = function(){
-    var fields = Array.prototype.slice.call(arguments).concat(['_id']);
+    var fields = this.fields.concat(['_id']);
     var oids = this.objectIds;
   for (var obj of this.arr){
     for(var field in obj){

@@ -1,10 +1,14 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    Promise = require('bluebird');
+
+var db;
 
 module.exports = function(){
-    mongoose.connect('mongodb://localhost/todoDb');
-    var db = mongoose.connection;
-    db.on('error', function(err){
-        console.error(err);
-    });
+    if (!db){
+        db = mongoose.connect('mongodb://localhost/todoDb', function(err){
+            if (err)
+                console.log(err);
+        });
+    }
     return db;
 }
